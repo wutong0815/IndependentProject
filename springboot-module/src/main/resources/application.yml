@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: springboot-module
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://localhost:3306/IndependentProject?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    username: root
+    password: 12345678
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    type: com.alibaba.druid.pool.DruidDataSource
+
+    # Druid 配置
+    druid:
+      initial-size: 5 # 初始化连接数量
+      min-idle: 5 # 最小空闲连接数量
+      max-active: 20 # 最大连接数量
+      max-wait: 60000 # 连接超时时间
+      time-between-eviction-runs-millis: 60000 # 连接空闲超时时间
+      min-evictable-idle-time-millis: 300000 # 连接最小空闲时间
+      validation-query: SELECT 1 FROM DUAL # 连接验证查询语句
+      test-while-idle: true # 连接空闲时是否进行验证
+      test-on-borrow: false # 连接借用时是否进行验证
+      test-on-return: false # 连接归还时是否进行验证
+      filter:
+        stat:
+          log-slow-sql: true # 是否记录慢查询 SQL 语句
+          slow-sql-millis: 2000 # 慢查询时间阈值
+          merge-sql: true # 合并 SQL 语句
+      stat-view-servlet:
+        enabled: false # 是否启用统计视图
+        url-pattern: /druid/* # 统计视图 URL 映射
+        login-username: admin # 登录用户名
+        login-password: admin # 登录密码
+
+  # JPA 配置
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+
+# MyBatis Plus 配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.example.springbootmodule.entity
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    default-fetch-size: 100
+    default-statement-timeout: 30
+
+# 日志配置
+logging:
+  level:
+    com.example: DEBUG
+    org.springframework.web: INFO
