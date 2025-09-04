@@ -16,6 +16,7 @@
     <modules>
         <module>springboot-common</module>
         <module>springboot-module</module>
+        <module>springboot-medical</module>
     </modules>
 
     <properties>
