@@ -1,62 +1,98 @@
 package com.example.springbootmodule.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
-import com.example.springbootcommon.domain.BaseEntity;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
+/**
+ * 用户
+ */
 @Data
-@EqualsAndHashCode(callSuper = true)
-@TableName("user")
-public class User extends BaseEntity {
+@EqualsAndHashCode(callSuper = false)
+@TableName("sys_user")
+public class User {
 
+    /**
+     * 主键
+     */
     @TableId(type = IdType.AUTO)
+    @NotBlank
     private Long id;
 
-    @NotBlank(message = "用户名不能为空")
-    @Size(min = 2, max = 50, message = "用户名长度必须在2-50个字符之间")
-    @TableField("username")
+    /**
+     * 用户名
+     */
+    @NotBlank
     private String username;
-
-    @NotBlank(message = "密码不能为空")
-    @TableField("password")
+    /**
+     * 密码
+     */
+    @NotBlank
     private String password;
-
-    @NotBlank(message = "邮箱不能为空")
-    @Email(message = "邮箱格式不正确")
-    @TableField("email")
+    /**
+     * 邮箱
+     */
     private String email;
-
-    @TableField("phone")
+    /**
+     * 手机号
+     */
+    @NotBlank
     private String phone;
-
-    @TableField("nickname")
+    /**
+     * 真实姓名
+     */
+    private String realName;
+    /**
+     * 昵称
+     */
     private String nickname;
-
-    @TableField("avatar")
+    /**
+     * 头像
+     */
     private String avatar;
-
-    @TableField("gender")
+    /**
+     * 性别
+     */
     private Integer gender;
-
-    @TableField("birthday")
-    private LocalDateTime birthday;
-
-    @TableField("status")
+    /**
+     * 出生日期
+     */
+    private LocalDateTime birthDate;
+    /**
+     * 状态
+     */
     private Integer status;
-
-    @TableField("last_login_time")
+    /**
+     * 最后登录时间
+     */
     private LocalDateTime lastLoginTime;
-
-    @TableField("last_login_ip")
+    /**
+     * 最后登录IP
+     */
     private String lastLoginIp;
+    /**
+     * 登录次数
+     */
+    private Integer loginCount;
 
+    /**
+     * 创建时间
+     */
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
+
+    /**
+     * 更新时间
+     */
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
+
+    /**
+     * 删除状态
+     */
     @TableLogic
-    @TableField("deleted")
     private Integer deleted;
 }

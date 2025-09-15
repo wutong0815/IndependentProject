@@ -7,6 +7,9 @@ import lombok.EqualsAndHashCode;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+/**
+ * 药品
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("medication")

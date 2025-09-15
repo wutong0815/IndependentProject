@@ -1,4 +1,4 @@
-package com.example.springbootmedical.entity;
+package com.example.springbootmodule.domain;
 
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
@@ -6,24 +6,20 @@ import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
-/**
- * 科室
- */
 @Data
 @EqualsAndHashCode(callSuper = false)
-@TableName("department")
-public class Department {
+@TableName("sys_role")
+public class Role {
 
     @TableId(type = IdType.AUTO)
+
     private Long id;
 
-    private Long institutionId;
-    private String name;
-    private String code;
+    private String roleName;
+    private String roleCode;
+    private Integer roleType;
     private String description;
-    private Long parentId;
-    private String leader;
-    private String contactPhone;
+    private Integer dataScope;
     private Integer status;
 
     @TableField(fill = FieldFill.INSERT)

@@ -6,6 +6,9 @@ import lombok.EqualsAndHashCode;
 
 import java.time.LocalDateTime;
 
+/**
+ * 患者
+ */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @TableName("patient")

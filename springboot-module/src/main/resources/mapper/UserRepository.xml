@@ -3,17 +3,17 @@
 <mapper namespace="com.example.springbootmodule.mapper.UserRepository">
 
     <select id="findByUsername" resultType="com.example.springbootmodule.domain.User">
-        SELECT * FROM user
+        SELECT * FROM sys_user
         WHERE username = #{username} AND deleted = 0
     </select>
 
     <select id="findByEmail" resultType="com.example.springbootmodule.domain.User">
-        SELECT * FROM user
+        SELECT * FROM  sys_user
         WHERE email = #{email} AND deleted = 0
     </select>
 
     <select id="selectUserPage" resultType="com.example.springbootmodule.domain.User">
-        SELECT u.* FROM user u
+        SELECT u.* FROM sys_user u
         LEFT JOIN user_profile up ON u.id = up.user_id
         WHERE u.deleted = 0
         <if test="query.username != null and query.username != ''">
@@ -41,7 +41,7 @@
     </select>
 
     <update id="updateLoginInfo">
-        UPDATE user
+        UPDATE sys_user
         SET last_login_time = #{loginTime}, last_login_ip = #{loginIp}, update_time = NOW()
         WHERE id = #{id} AND deleted = 0
     </update>

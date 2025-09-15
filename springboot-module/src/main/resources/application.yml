@@ -31,7 +31,12 @@ spring:
         url-pattern: /druid/* # 统计视图 URL 映射
         login-username: admin # 登录用户名
         login-password: admin # 登录密码
-
+  # 安全配置
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          secret-value: ${jwt.secret}
   # JPA 配置
   jpa:
     hibernate:
@@ -57,3 +62,22 @@ logging:
   level:
     com.example: DEBUG
     org.springframework.web: INFO
+
+
+# JWT配置
+jwt:
+  secret: medical-system-secret-key-2024-spring-boot-jwt
+  expiration: 86400 # 24小时
+
+sso:
+  token-store-type: redis
+  client:
+    client-id: medical-system-client
+
+    client-secret: medical-system-client-secret
+    access-token-uri: http://localhost:8080/oauth/token
+    user-authorization-uri: http://localhost:8080/oauth/authorize
+    client-authentication-method: client_secret_basic
+    scope: server,client
+
+
