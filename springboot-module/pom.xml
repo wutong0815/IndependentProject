@@ -12,7 +12,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springboot-module</name>
 	<description>springboot-module</description>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
@@ -32,11 +32,11 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.example</groupId>
-            <artifactId>springboot-common</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+		<dependency>
+			<groupId>com.example</groupId>
+			<artifactId>springboot-common</artifactId>
+			<version>${project.version}</version> <!-- 或 0.0.1-SNAPSHOT -->
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
@@ -83,13 +83,6 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+
 
 </project>

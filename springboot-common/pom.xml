@@ -5,17 +5,21 @@
 	<parent>
 		<groupId>com.example</groupId>
 		<artifactId>IndependentProject</artifactId>
-		<version>0.0.1</version>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>com.example</groupId>
 	<artifactId>springboot-common</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>springboot-common</name>
 	<description>springboot-common</description>
-	<packaging>pom</packaging>
+	<packaging>jar</packaging>  <!-- 或者 war 如果是web应用 -->
 
 	<properties>
 		<java.version>21</java.version>
+		<maven.compiler.source>21</maven.compiler.source>
+		<maven.compiler.target>21</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<skipTests>true</skipTests>
 	</properties>
 
 	<dependencies>
@@ -118,25 +122,6 @@
 		</dependency>
 	</dependencies>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</path>
-						<path>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct-processor</artifactId>
-						</path>
-					</annotationProcessorPaths>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+
 
 </project>

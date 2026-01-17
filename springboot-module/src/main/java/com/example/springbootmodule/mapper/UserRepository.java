@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 @Mapper
 public interface UserRepository extends BaseMapper<User> {
@@ -17,7 +18,10 @@ public interface UserRepository extends BaseMapper<User> {
                                   @Param("realName") String realName,
                                   @Param("status") Integer status);
 
-    User findByUsername(@Param("username") String username);
+
+    Optional<User> findByUsername(String username);
+
+    Optional<User> findByPhone(String phone);
 
     User findByEmail(@Param("email") String email);
 

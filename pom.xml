@@ -13,7 +13,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>IndependentProject</artifactId>
-    <version>0.0.1</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <name>IndependentProject</name>
     <description>IndependentProject</description>
@@ -24,6 +24,7 @@
         <module>springboot-common</module>
         <module>springboot-module</module>
         <module>springboot-medical</module>
+        <module>springboot-zookeeper</module>
     </modules>
 
     <properties>
@@ -267,6 +268,42 @@
                     <encoding>${project.build.sourceEncoding}</encoding>
                 </configuration>
             </plugin>
+            <!-- module-a/pom.xml -->
+
+            <!-- 示例：把依赖复制到 target/lib/ -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>libs</classifier>
+                            <outputDirectory>${project.basedir}/../target/libs</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
 
             <!-- Spring Boot Maven 插件 -->
             <plugin>
@@ -285,7 +322,6 @@
         </plugins>
     </build>
 
-
     <!-- 阿里云镜像配置 -->
     <repositories>
         <repository>
@@ -303,42 +339,14 @@
             <id>spring-milestones</id>
             <name>Spring Milestones</name>
             <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-        </repository>
-        <repository>
-            <id>spring-releases</id>
-            <name>Spring Releases</name>
-            <url>https://repo.spring.io/release</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>aliyun</id>
-            <name>Aliyun Plugin Repository</name>
-            <url>https://maven.aliyun.com/repository/public</url>
             <releases>
-                <enabled>true</enabled>
+                <enabled>false</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
             </snapshots>
-        </pluginRepository>
-        <pluginRepository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
+        </repository>
+    </repositories>
 
     <!-- 配置文件过滤 -->
     <profiles>

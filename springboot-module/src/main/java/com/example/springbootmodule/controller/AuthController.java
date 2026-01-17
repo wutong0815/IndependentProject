@@ -1,10 +1,14 @@
 package com.example.springbootmodule.controller;
 
-import com.example.common.response.Result;
-import com.example.medical.entity.SysUser;
-import com.example.medical.security.JwtTokenUtil;
-import com.example.medical.service.SysUserService;
+import com.example.springbootcommon.*;
+import com.example.springbootcommon.response.Result;
+import com.example.springbootmodule.*;
+import com.example.springbootmodule.domain.User;
+import com.example.springbootmodule.security.JwtTokenUtil;
+import com.example.springbootmodule.security.SsoJwtTokenUtil;
+import com.example.springbootmodule.service.UserService;
 import jakarta.validation.Valid;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -27,7 +31,7 @@ public class AuthController {
     private JwtTokenUtil jwtTokenUtil;
 
     @Autowired
-    private SysUserService userService;
+    private UserService userService;
 
     @PostMapping("/login")
     public Result<Map<String, Object>> login(@Valid @RequestBody LoginRequest loginRequest) {
@@ -39,7 +43,7 @@ public class AuthController {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         String token = jwtTokenUtil.generateToken(userDetails);
-        SysUser user = userService.getByUsername(userDetails.getUsername());
+        User user = userService.getByUsername(userDetails.getUsername());
 
         Map<String, Object> result = new HashMap<>();
         result.put("token", token);
@@ -50,12 +54,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public Result<SysUser> register(@Valid @RequestBody RegisterRequest registerRequest) {
+    public Result<User> register(@Valid @RequestBody RegisterRequest registerRequest) {
         if (userService.getByUsername(registerRequest.getUsername()) != null) {
             return Result.error("用户名已存在");
         }
 
-        SysUser user = new SysUser();
+        User user = new User();
         user.setUsername(registerRequest.getUsername());
         user.setPassword(registerRequest.getPassword());
         user.setEmail(registerRequest.getEmail());
@@ -70,7 +74,7 @@ public class AuthController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
 
-        SysUser user = userService.getByUsername(username);
+        User user = userService.getByUsername(username);
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
 
         Map<String, Object> result = new HashMap<>();
@@ -80,13 +84,13 @@ public class AuthController {
         return Result.success(result);
     }
 
-    // DTO类
+    @Data
     public static class LoginRequest {
         private String username;
         private String password;
-        // getters and setters
     }
 
+    @Data
     public static class RegisterRequest {
         private String username;
         private String password;

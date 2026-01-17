@@ -1,0 +1,5 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.example.redis.config.RedisAutoConfiguration
+
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+com.example.redis.config.RedisAutoConfiguration
